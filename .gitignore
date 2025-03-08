@@ -1,0 +1,5 @@
+gateway/.envrc
+orders/.envrc
+gateway/tmp/
+orders/tmp/
+.air.toml
