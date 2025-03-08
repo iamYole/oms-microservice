@@ -15,3 +15,6 @@ A scalable and efficient Order Management System built using a microservices arc
 - Docker & Kubernetes – Containerization and orchestration
 
 Designed for scalability, reliability, and flexibility
+
+
+![alt text](diagram.png)
