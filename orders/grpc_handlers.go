@@ -25,11 +25,27 @@ func NewGRPCHandler(grpcServer *grpc.Server, service OrderService, channel *amqp
 	pb.RegisterOrderServiceServer(grpcServer, handler)
 }
 
+func (h *grpcHandler) GetOrder(ctx context.Context, o *pb.GetOrderRequest) (*pb.Order, error) {
+
+	order, err := h.service.GetOrder(ctx, o)
+	if err != nil {
+		return nil, err
+	}
+
+	return order, nil
+}
+
 func (h *grpcHandler) CreateOrder(ctx context.Context, p *pb.CreateOrderRequest) (*pb.Order, error) {
 	log.Printf("New Order Received\n %v", p)
-	order := &pb.Order{
-		ID:     "77",
-		Status: "Pending",
+
+	items, err := h.service.ValidateOrder(ctx, p)
+	if err != nil {
+		return nil, err
+	}
+
+	order, err := h.service.CreateOrder(ctx, p,items)
+	if err != nil {
+		return nil, err
 	}
 
 	marshalledOrder, err := json.Marshal(order)

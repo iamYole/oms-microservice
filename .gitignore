@@ -1,5 +1,8 @@
 gateway/.envrc
 orders/.envrc
+payments/.envrc
 gateway/tmp/
 orders/tmp/
+payments/tmp/
 .air.toml
+tmp/
